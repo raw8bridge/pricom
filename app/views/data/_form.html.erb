@@ -12,23 +12,23 @@
   <% end %>
 
   <div class="my-5">
+    <%= form.label :product_id %>
+    <%= form.collection_select :product_id, Product.all, :id, :name, { prompt: "" }, { class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" } %>
+  </div>
+
+  <div class="my-5">
+    <%= form.label :shop_id %>
+    <%= form.collection_select :shop_id, Shop.all, :id, :name, { prompt: ""  }, { class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" } %>
+  </div>
+
+  <div class="my-5">
     <%= form.label :price %>
     <%= form.number_field :price, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
   </div>
 
   <div class="my-5">
     <%= form.label :date %>
-    <%= form.date_field :date, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
-  </div>
-
-  <div class="my-5">
-    <%= form.label :product_id %>
-    <%= form.text_field :product_id, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
-  </div>
-
-  <div class="my-5">
-    <%= form.label :shop_id %>
-    <%= form.text_field :shop_id, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
+    <%= form.date_field :date, value: Date.today, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
   </div>
 
   <div class="inline">
