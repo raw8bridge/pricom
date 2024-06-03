@@ -3,12 +3,48 @@
     <p class="py-2 px-3 bg-green-50 mb-5 text-green-500 font-medium rounded-lg inline-block" id="notice"><%= notice %></p>
   <% end %>
 
-  <div class="flex justify-between items-center">
-    <h1 class="font-bold text-4xl">Data</h1>
-    <%= link_to "New datum", new_datum_path, class: "rounded-lg py-3 px-5 bg-blue-600 text-white block font-medium" %>
-  </div>
+  <% if @data.exists? %>
+    <div class="flex justify-between items-center">
+      <h1 class="font-bold text-4xl"><%= @data.first.product.name %></h1>
+      <div class="flex items-container">
+        <%= link_to "Back to products", category_products_path(category_id: @category_id), class: "rounded-lg py-3 px-5 bg-blue-600 text-white block font-medium" %>
+        <%= link_to "New datum", new_datum_path(category_id: @category_id, product_id: @data&.first&.product&.id), class: "rounded-lg ml-5 py-3 px-5 bg-blue-600 text-white block font-medium" %>
+      </div>
+    </div>
 
-  <div id="data" class="min-w-full">
-    <%= render @data %>
-  </div>
+    <div id="data" class="min-w-full mt-5">
+      <table class="divide-y divide-gray-200 dark:divide-neutral-700">
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Price</th>
+            <th>Shop name</th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-gray-200 dark:divide-neutral-700">
+          <% @data.each do |d| %>
+            <tr>
+              <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-neutral-200">
+                <%= d.date %>
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-neutral-200">
+                <%= number_to_currency(d.price, unit: "円", precision: 0, format: "%n%u" ) %>
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-neutral-200">
+                <%= d.shop.name %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  <% else %>
+    <div class="flex justify-between items-center">
+      <h1 class="font-bold text-4xl">No Data</h1>
+      <div class="flex items-container">
+        <%= link_to "Back to products", category_products_path(category_id: @category_id), class: "rounded-lg py-3 px-5 bg-blue-600 text-white block font-medium" %>
+        <%= link_to "New datum", new_datum_path(product_id: @data&.first&.product&.id), class: "rounded-lg ml-5 py-3 px-5 bg-blue-600 text-white block font-medium" %>
+      </div>
+    </div>
+  <% end %>
 </div>

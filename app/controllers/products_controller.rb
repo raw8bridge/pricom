@@ -3,7 +3,7 @@ class ProductsController < ApplicationController
 
   # GET /products
   def index
-    @products = Product.all
+    @products = params[:category_id].present? ? Product.where(category_id: params[:category_id]) : Product.all
   end
 
   # GET /products/1
@@ -12,11 +12,13 @@ class ProductsController < ApplicationController
 
   # GET /products/new
   def new
+    @category_id = Category.exists?(id: params[:category_id]) ? params[:category_id] : nil
     @product = Product.new
   end
 
   # GET /products/1/edit
   def edit
+    @category_id = @product.category_id
   end
 
   # POST /products
@@ -24,7 +26,7 @@ class ProductsController < ApplicationController
     @product = Product.new(product_params)
 
     if @product.save
-      redirect_to @product, notice: "Product was successfully created."
+      redirect_to category_products_path(category_id: @product.category_id), notice: "Product was successfully created."
     else
       render :new, status: :unprocessable_entity
     end
@@ -33,7 +35,7 @@ class ProductsController < ApplicationController
   # PATCH/PUT /products/1
   def update
     if @product.update(product_params)
-      redirect_to @product, notice: "Product was successfully updated.", status: :see_other
+      redirect_to category_products_path(category_id: @product.category_id), notice: "Product was successfully updated.", status: :see_other
     else
       render :edit, status: :unprocessable_entity
     end

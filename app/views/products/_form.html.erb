@@ -23,7 +23,7 @@
 
   <div class="my-5">
     <%= form.label :category_id %>
-    <%= form.collection_select :category_id, Category.all, :id, :name, { prompt: "" }, { class: "block shadow rounded-md border border-gray-200 outline-none" } %>
+    <%= form.collection_select :category_id, Category.all, :id, :name, { prompt: "", selected: @category_id }, { class: "block shadow rounded-md border border-gray-200 outline-none" } %>
   </div>
 
   <div class="inline">

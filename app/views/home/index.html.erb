@@ -1,6 +1,14 @@
 <div class="w-full">
   <div class="flex justify-between items-center">
     <h1 class="font-bold text-4xl">Home</h1>
-    <%= link_to "New datum", new_datum_path, class: "rounded-lg py-3 px-5 bg-blue-600 text-white block font-medium" %>
+  </div>
+
+  <div class="mt-5">
+    <div class="mt-5">
+      <%= link_to "New datum", new_datum_path, class: "rounded-lg py-3 px-5 mx-auto bg-blue-600 text-white block w-1/2 font-medium text-center" %>
+    </div>
+    <div class="mt-5">
+      <%= link_to "Show categories", categories_path, class: "rounded-lg py-3 px-5 mx-auto bg-blue-600 text-white block w-1/2 font-medium text-center" %>
+    </div>
   </div>
 </div>

@@ -1,14 +1,27 @@
 <div class="w-full">
-  <% if notice.present? %>
-    <p class="py-2 px-3 bg-green-50 mb-5 text-green-500 font-medium rounded-lg inline-block" id="notice"><%= notice %></p>
-  <% end %>
-
   <div class="flex justify-between items-center">
     <h1 class="font-bold text-4xl">Categories</h1>
     <%= link_to "New category", new_category_path, class: "rounded-lg py-3 px-5 bg-blue-600 text-white block font-medium" %>
   </div>
-
-  <div id="categories" class="min-w-full">
-    <%= render @categories %>
+  <div class="mt-5">
+    <table class="divide-y divide-gray-200 dark:divide-neutral-700">
+      <thead>
+      </thead>
+      <tbody class="divide-y divide-gray-200 dark:divide-neutral-700">
+        <% @categories.each do |category| %>
+          <tr>
+            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-neutral-200">
+              <%= link_to category.name, category_products_path(category_id: category.id) %>
+            </td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-neutral-200">
+              <%= link_to "Show products", category_products_path(category_id: category.id), class: "rounded-lg py-3 px-5 bg-blue-600 text-white block font-medium" %>
+            </td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-neutral-200">
+              <%= link_to "Edit", edit_category_path(category), class: "rounded-lg py-3 ml-2 px-5 bg-gray-100 inline-block font-medium" %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
   </div>
 </div>
